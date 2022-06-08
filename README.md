@@ -47,6 +47,11 @@ Please include a description in the README.md how to run the project locally and
 
 The final delivery must be running with Docker.
 
+## Tech Requirements
+
+- Use the LTS version of Java 11 or 17
+- Run the generation of the pdf in another Thread
+
 ## Instructions
 
 - Fork this repo
