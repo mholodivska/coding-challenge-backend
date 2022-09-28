@@ -3,9 +3,9 @@
 ## The case study: Application review
 
 Reviewing applications is one of the key activities, when starting a new project.
-To takle that challenge, BP ACCELERATOR Inc. wants to provide an API, via which applicant can hand in their application with past project experience.
+To tackle that challenge, BP ACCELERATOR Inc. wants to provide an API, via which applicant can hand in their application with past project experience.
 
-The software stores the data in a data base and generates a document, so the application can be reviewed by the HR department
+The software stores the data in a database and generates a document, so the application can be reviewed by the HR department. When an application is submitted is should also be sent via Kafka to the Compliance department for validation.
 
 ## Product Requirements
 
@@ -39,6 +39,8 @@ As an application reviewer at BP ACCELERATOR Inc.,
 Create a Java backend application that satisfies all must-have requirements above, plus any nice-to-have requirements you wish to include.
 
 For that, you'll need to provide a REST-API, set up a database and generate a PDF document, that contains the applicants data.
+
+You can run Kafka in a local container and send messages to the topic of your choice, no need to create a listener application.
 
 You can use any boilerplate/approach you prefer, but try to keep it simple. We encourage you to use your favorite tools and packages to build a solid web application.
 
