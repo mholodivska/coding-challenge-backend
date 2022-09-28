@@ -5,7 +5,7 @@
 Reviewing applications is one of the key activities, when starting a new project.
 To tackle that challenge, BP ACCELERATOR Inc. wants to provide an API, via which applicant can hand in their application with past project experience.
 
-The software stores the data in a database and generates a document, so the application can be reviewed by the HR department. When an application is submitted is should also be sent via Kafka to the Compliance department for validation.
+The software stores the data in a database and generates a document, so the application can be reviewed by the HR department. When an application is submitted it should also be sent via Kafka to the Compliance department for validation.
 
 ## Product Requirements
 
