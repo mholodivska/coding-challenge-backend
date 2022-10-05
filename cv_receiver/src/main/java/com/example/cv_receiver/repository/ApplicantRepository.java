@@ -6,5 +6,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @EnableJpaRepositories
 public interface ApplicantRepository extends JpaRepository<ApplicantInfo, Long> {
-
+    ApplicantInfo findByName(String name);
+    void deleteByName(String name);
 }

@@ -12,7 +12,7 @@
 	<artifactId>cv_receiver</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>cv_receiver</name>
-	<description>cv_receiver</description>
+	<description>module that receives cv of the applicant</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>

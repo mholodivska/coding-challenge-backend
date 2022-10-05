@@ -17,6 +17,13 @@ public class ApplicantInfo {
     @Column
     private String name;
 
+    @Column
+    private String email;
+
+    @Column
+    private String gitHubUserLink;
+
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "applicant_info_id")
     private Set<ProjectInfo> projects;

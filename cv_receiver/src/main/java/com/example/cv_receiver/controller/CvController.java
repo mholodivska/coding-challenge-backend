@@ -17,7 +17,10 @@ public class CvController {
     public void postApplicantInfo(@RequestBody ApplicantInfo applicantInfo) {
 
         System.out.println("got info " + applicantInfo);
-
+        ApplicantInfo existedApplicant = applicantRepository.findByName(applicantInfo.getName());
+        if (existedApplicant != null) {
+            applicantRepository.deleteById(existedApplicant.getId());
+        }
         applicantRepository.save(applicantInfo);
 
         producer.sendMessage(applicantInfo);
