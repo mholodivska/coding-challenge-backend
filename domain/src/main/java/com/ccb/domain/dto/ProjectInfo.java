@@ -1,14 +1,10 @@
 package com.ccb.domain.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import net.minidev.json.annotate.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.Year;
-import java.util.Arrays;
 
 @NoArgsConstructor
 @Getter
@@ -54,18 +50,15 @@ public class ProjectInfo {
 
     @Override
     public String toString() {
-        return "ProjectInfo{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", employmentMode=" + employmentMode +
-                ", capacity=" + capacity +
-                ", durationMonths=" + durationMonths +
-                ", year=" + year +
-                ", role='" + role + '\'' +
-                ", teamSize=" + teamSize +
-                ", linkToRepo='" + linkToRepo + '\'' +
-                ", linkToLive='" + linkToLive + '\'' +
-                '}';
+        return "title: '" + title + '\'' +
+                ", employmentMode: " + employmentMode +
+                ", capacity: " + capacity +
+                ", durationMonths: " + durationMonths +
+                ", year: " + year +
+                ", role: '" + role + '\'' +
+                ", teamSize: " + teamSize +
+                ", linkToRepo: '" + linkToRepo + '\'' +
+                ", linkToLive: '" + linkToLive + '\'';
     }
 
     @AllArgsConstructor

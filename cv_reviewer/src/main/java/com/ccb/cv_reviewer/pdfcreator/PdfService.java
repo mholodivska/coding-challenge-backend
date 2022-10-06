@@ -10,6 +10,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
+import java.util.Arrays;
 
 
 @Service
@@ -18,13 +19,11 @@ public class PdfService {
     public void createPdf(long id, ApplicantRepository applicantRepository) throws DocumentException, IOException {
         if (applicantRepository.findById(id).isPresent()) {
             ApplicantInfo applicantInfo = applicantRepository.findById(id).get();
-
             Document document = new Document(PageSize.A4, 25, 25, 25, 25);
 
             ByteArrayOutputStream os = new ByteArrayOutputStream();
 
             PdfWriter.getInstance(document, os);
-
             document.open();
 
             Paragraph title = new Paragraph("Applicant " + applicantInfo.getName(),
@@ -59,7 +58,7 @@ public class PdfService {
             document.add(table);
             document.close();
 
-            FileOutputStream fos = new FileOutputStream(applicantInfo.getName() + ".pdf");
+            FileOutputStream fos = new FileOutputStream(applicantInfo.getName().replaceAll(" ", "_") + ".pdf");
             fos.write(os.toByteArray());
         }
     }

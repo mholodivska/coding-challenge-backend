@@ -1,6 +1,7 @@
 package com.ccb.domain.dto;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -25,7 +26,7 @@ public class ApplicantInfo {
     private String gitHubUserLink;
 
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JoinColumn(name = "applicant_info_id")
     private Set<ProjectInfo> projects;
 

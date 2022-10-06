@@ -4,6 +4,7 @@ import com.ccb.domain.repository.ApplicantRepository;
 import com.itextpdf.text.DocumentException;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 public class PdfCreationService implements Runnable {
 
@@ -21,10 +22,8 @@ public class PdfCreationService implements Runnable {
     public void run() {
         try {
             pdfService.createPdf(id, applicantRepository);
-        } catch (DocumentException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (DocumentException | IOException e) {
+            System.out.println(e.getMessage() + " :: " + Arrays.toString(e.getStackTrace()));
         }
     }
 }

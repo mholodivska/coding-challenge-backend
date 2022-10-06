@@ -1,3 +1,13 @@
+How to run app:
+1) Open terminal and run "docker-compose up", the project and database will be built. 
+2) You can test it using Postman (postman collection "backend-challange.postman_collection.json" is attached in main repo).
+3) Generated pdf file "Marta_Holodivska.pdf" is also attached in main repository. When you create new pdf file it will
+also be saved to main repository.
+
+
+
+
+
 # AM Coding Challenge - Backend (Java)
 
 ## The case study: Application review
