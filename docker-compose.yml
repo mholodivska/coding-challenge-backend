@@ -2,19 +2,19 @@ version: '3.7'
 
 services:
   zookeeper:
-    image: confluentinc/cp-zookeeper:latest
+    image: confluentinc/cp-zookeeper:7.0.0
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
     ports:
-      - 22181:2181
+      - "22181:2181"
 
   kafka:
-    image: confluentinc/cp-kafka:latest
+    image: confluentinc/cp-kafka:7.0.0
     depends_on:
       - zookeeper
     ports:
-      - 29092:29092
+      - "29092:29092"
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
@@ -24,21 +24,57 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
   cv_receiver:
+    image: maven:3.6.3-jdk-11-slim
+    build:
+      context: ./cv_receiver
+    ports:
+      - "8080:8080"
+    init: true
+    volumes:
+      - ./:/usr/src/app
+      - domain-target:/usr/src/app/domain/target
+      - maven-repository:/root/.m2:cached
+      - cv_receiver-target:/usr/src/app/cv_receiver/target
+    working_dir: /usr/src/app
+    depends_on:
+      - posgresql
+      - kafka
+    command: sh -c "mvn clean install -Dmaven.clean.failOnError=false -Dmaven.test.skip=true -pl .,domain,cv_receiver && java -jar ./cv_receiver/target/*.jar"
 
   cv_reviewer:
+    image: maven:3.6.3-jdk-11-slim
+    build:
+      context: ./cv_reviewer
+    ports:
+      - "8090:8080"
+    init: true
+    volumes:
+      - ./:/usr/src/app
+      - domain-target:/usr/src/app/domain/target
+      - maven-repository:/root/.m2:cached
+      - cv_reviewer-target:/usr/src/app/cv_reviewer/target
+    working_dir: /usr/src/app
+    depends_on:
+      - posgresql
+    command: sh -c "mvn clean install -Dmaven.clean.failOnError=false -Dmaven.test.skip=true -pl .,domain,cv_reviewer && java -jar ./cv_reviewer/target/*.jar"
+
 
   posgresql:
     image: postgres:13.3
     environment:
-      POSTGRES_DB: "applicants_db"
+      POSTGRES_DB: "postgres"
       POSTGRES_USER: "root"
       POSTGRES_PASSWORD: "996659"
     ports:
-      - "5432:5432"
-    networks:
-      - backend
-
-networks:
-
+      - "5433:5432"
+    volumes:
+      - ./domain/src/main/resources/database/initDb.sql:/docker-entrypoint-initdb.d/create_tables.sql
 
 volumes:
+  domain-target:
+  cv_receiver-target:
+  cv_reviewer-target:
+  maven-repository:
+  posgresql:
+
+
